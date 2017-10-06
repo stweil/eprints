@@ -8,7 +8,7 @@ my $session = EPrints::Test::get_test_session( 0 );
 ok(defined $session, 'opened an EPrints::Session object (noisy, no_check_db)');
 
 {
-package MyHander;
+package MyHandler;
 
 sub new { bless {}, shift; }
 
@@ -26,7 +26,7 @@ sub message
 my $doc = EPrints::XML::parse_xml_string( join "", <DATA> );
 my( $eprint_xml ) = $doc->documentElement->getElementsByTagName( "eprint" );
 
-my $handler = MyHander->new;
+my $handler = MyHandler->new;
 my $epdata = EPrints::DataObj::EPrint->xml_to_epdata( $session, $eprint_xml, Handler => $handler );
 
 is( $epdata->{title}, "Fulvous Whistling Ducks and Man", "Parsed title" );
